@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 
+import sys
+import os
 import argparse
 import Config
 import Tasks
-
-
-
-
 
 
 if __name__ == '__main__':
@@ -44,31 +42,36 @@ if __name__ == '__main__':
     test_g.add_argument('--test', action='store_true',
         help='Execute Python unittests')
 
-    
     # positional argument
     # parser.add_argument("echo")
 
     args = parser.parse_args()
 
-    # preload the config object
-    if args.ca:
-        config.ca = args.ca
-    if args.cert:
-        config.cert = args.cert
-    if args.key:
-        config.key = args.key
-    if args.server:
-        config.server = args.server
-    if args.port:
-        config.port = args.port
-    if args.group:
-        config.group = args.group
-    if args.user:
-        config.user = args.user
-    if args.uuid:
-        config.uuid = args.uuid
+    if args.test:
+        os.execlp('./test_taskshow.py', 'test_taskshow.py')
+    else:
+        # if we have been given a .taskrc, then use it
+        if args.taskrc:
+            config.use_taskrc(args.taskrc)
+        else:
+            # preload the config object
+            if args.ca:
+                config.ca = args.ca
+            if args.cert:
+                config.cert = args.cert
+            if args.key:
+                config.key = args.key
+            if args.server:
+                config.server = args.server
+            if args.port:
+                config.port = args.port
+            if args.group:
+                config.group = args.group
+            if args.user:
+                config.user = args.user
+            if args.uuid:
+                config.uuid = args.uuid
 
-
-    config.write_taskrc()
+            config.write_taskrc()
 
 

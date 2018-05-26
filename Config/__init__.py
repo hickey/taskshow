@@ -2,7 +2,6 @@
 import os
 import shutil
 
-
 class Config:
 
     def __init__(self):
@@ -39,7 +38,9 @@ class Config:
         shutil.copyfile(self.cert, os.path.expanduser('~/.task/cert.pem'))
         shutil.copyfile(self.ca, os.path.expanduser('~/.task/ca.pem'))
 
-
+    def use_taskrc(self, taskrc):
+        pass
+        
     #def __getattr__(self, name):
     #    print("__getattr__({})".format(name))
     #    if not name.startswith('_'):
